@@ -31,12 +31,9 @@ EXTENSION_NAME=$(echo $FULLNAME | awk '{print $2}')
 ( [[ ${#EXTENSION_NAME} -gt 3 ]] || ! [[ "$EXTENSION_NAME" =~ $MATCH_EXT_NAME ]] ) && \
     { echo "WRONG EXTENSION NAMING: only latin letters, no more than 3">&2; CHECK=1; }
 #six arg
-! [[ $6 =~ $MATCH_FILE_NUM ]] && \
+ ( ! [[ $6 =~ $MATCH_FILE_NUM ]] || (( $(echo "$6 > 100" | bc -l) )) ) && \
     { echo "WRONG FILE SIZE">&2; CHECK=1; }
-(( $(echo "$6 > 100" | bc -l) )) && \
-    { echo "WRONG FILE SIZE">&2; CHECK=1; }
-
-
+    
 test $CHECK -eq 0 && echo "all right" || echo "smthg goes wrong"
 
 
