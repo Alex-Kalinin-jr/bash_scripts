@@ -22,7 +22,7 @@ CHECK=0
 # #fifth arg
 ! [[ "$5" =~ $MATCH_FILE_NAME ]] && \
     { echo "WRONG FILE/EXT NAMING: only latin letters, \
-    no more than 7 for name, no more than 3 for extension">&2; CHECK=1; }
+no more than 7 for name, no more than 3 for extension">&2; CHECK=1; }
 FULLNAME=$(echo $5 | sed 's/\./ /') 
 FILENAME=$(echo $FULLNAME | awk '{print $1}')
 EXTENSION_NAME=$(echo $FULLNAME | awk '{print $2}')
@@ -33,7 +33,7 @@ EXTENSION_NAME=$(echo $FULLNAME | awk '{print $2}')
 #six arg
  ( ! [[ $6 =~ $MATCH_FILE_NUM ]] || (( $(echo "$6 > 100" | bc -l) )) ) && \
     { echo "WRONG FILE SIZE">&2; CHECK=1; }
-    
+
 test $CHECK -eq 0 && echo "all right" || echo "smthg goes wrong"
 
 
