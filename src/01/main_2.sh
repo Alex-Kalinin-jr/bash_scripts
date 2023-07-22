@@ -9,7 +9,6 @@ function create_one_time ()
     FOLDERNAME=$1
     FILECOUNT=$2
     NEWFILENAME=$3
-    echo "newfilename = $NEWFILENAME"
     START_FOLDER_COUNT=$4
     REGNAMING=$5
     REGFILENAME=$6
@@ -20,19 +19,30 @@ function create_one_time ()
 
 
     for (( y=1; y<=$FILECOUNT; y++ )); do
-        touch $NEWFILENAME
-        NEWFILENAME=$(echo $NEWFILENAME | sed 's/'$FILE_FORMER'/'$FILE_FORMER''$FILE_FORMER'/')
-        echo $NEWFILENAME
+        FREE_SPACE=$(df -B G / | awk '{print $4}' | sed -e 's/G//')
+        FREE_SPACE=$(echo $FREE_SPACE | awk '{print $2}' | sed -n '$p')
+        echo $FREE_SPACE
+        [[ $FREE_SPACE -lt 1 ]] && return #end condition for loop
+        truncate -s $8'K' $NEWFILENAME
+        EXISTING=$(echo $PWD)
+        FOR_LOG=$(echo $NEWFILENAME | sed -e 's/$/'_$8'/')
+        FOR_LOG=$(awk -v ONE=$NEWFILENAME '{print ONE}')
+        echo $FOR_LOG
+        NEWFILENAME=$(echo $NEWFILENAME | \
+            sed 's/'$FILE_FORMER'/'$FILE_FORMER''$FILE_FORMER'/')
     done
 
     [[ $4 -eq 0 ]] && return #end condition for recursy
 
     for (( y=1; y<=$START_FOLDER_COUNT; y++)); do
-        FOLDERNAME=$(echo $FOLDERNAME | sed 's/'$FOLDER_FORMER'/'$FOLDER_FORMER''$FOLDER_FORMER'/')
+        FOLDERNAME=$(echo $FOLDERNAME | \
+            sed 's/'$FOLDER_FORMER'/'$FOLDER_FORMER''$FOLDER_FORMER'/')
         (( START_FOLDER_COUNT-- ))
         mkdir $FOLDERNAME
-        create_one_time $FOLDERNAME $2 $NEWFILENAME $START_FOLDER_COUNT $5 $6 $FOLDERNAME
+        create_one_time $FOLDERNAME $2 $NEWFILENAME \
+            $START_FOLDER_COUNT $5 $6 $FOLDERNAME $8
     done    
 }
-
-create_one_time $NAMING $4 $5 $2 $NAMING $FILENAME $1
+SCRIPT_DATE=$(date +"%d%m%y")
+NAME_WITH_DATE=$(echo $5 | sed 's/$/'_$SCRIPT_DATE'/')
+create_one_time $NAMING $4 $NAME_WITH_DATE $2 $NAMING $FILENAME $1 $6

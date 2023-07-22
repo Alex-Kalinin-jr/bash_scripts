@@ -33,8 +33,14 @@ no more than 7 for name, no more than 3 for extension">&2; E_BADARGS=65; }
 ( [[ ${#EXTENSION_NAME} -gt 3 ]] || ! [[ "$EXTENSION_NAME" =~ $MATCH_EXT_NAME ]] ) && \
     { echo "WRONG EXTENSION NAMING: only latin letters, no more than 3">&2; E_BADARGS=65; }
 #six arg
- ( ! [[ $6 =~ $MATCH_FILE_NUM ]] || (( $(echo "$6 > 100" | bc -l) )) ) && \
+#  ( ! [[ $6 =~ $MATCH_FILE_NUM ]] || (( $(echo "$6 > 100" | bc -l) )) ) && \
+#     { echo "WRONG FILE SIZE">&2; E_BADARGS=65; }
+#-----------------------------------------------------------
+#  the code above is for decimal nums but user can pass
+#+ decimal num that does not integer num
+#+ in bytes. therefore only integers are permitted.
+#-----------------------------------------------------------
+ ( ! [[ $6 =~ $MATCH_NUM ]] || (( $(echo "$6 > 100" | bc -l) )) ) && \
     { echo "WRONG FILE SIZE">&2; E_BADARGS=65; }
-
 
 
