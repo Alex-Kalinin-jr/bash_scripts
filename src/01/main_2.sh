@@ -5,34 +5,34 @@ test $E_BADARGS -eq 65 && exit $E_BADARGS
 
 function create_one_time ()
 {
-    [[ $4 -eq 0 ]] && return
+    cd $7
     FOLDERNAME=$1
     FILECOUNT=$2
     NEWFILENAME=$3
+    echo "newfilename = $NEWFILENAME"
     START_FOLDER_COUNT=$4
-    II=$5 #FOR FORMING OF NAME
-    JJ=$6 #FOR FOMING OF FOLDER NAME
-    REGNAMING=$7
-    REGFILENAME=$8
-    
-    FOLDER_FORMER=${REGNAMING:$JJ:(( $JJ + 1 ))}
-    FILE_FORMER=${REGFILENAME:$II:(( $II + 1 ))}
-    (( JJ++ ))
-    (( II++ ))
+    REGNAMING=$5
+    REGFILENAME=$6
+    DIR_PATH=$7
+
+    FILE_FORMER=${REGFILENAME:0:1}
+    FOLDER_FORMER=${REGNAMING:0:1}
+
 
     for (( y=1; y<=$FILECOUNT; y++ )); do
-        # touch "$NEWFILENAME"
+        touch $NEWFILENAME
+        NEWFILENAME=$(echo $NEWFILENAME | sed 's/'$FILE_FORMER'/'$FILE_FORMER''$FILE_FORMER'/')
         echo $NEWFILENAME
-        NEWFILENAME=$(echo $NEWFILENAME | sed 's/'$FILEFORMER'/'$FILEFORMER$FILEFORMER'/')
     done
 
+    [[ $4 -eq 0 ]] && return #end condition for recursy
+
     for (( y=1; y<=$START_FOLDER_COUNT; y++)); do
-        FOLDERNAME=$(echo $FOLDERNAME | sed 's/'$FOLDERFORMER'/'$FOLDERFORMER$FOLDERFORMER'/')
-        echo $FOLDERNAME
-        (( START_FOLDER_COUNT=$START_FOLDER_COUNT-1 ))
-        # create_one_time $FOLDERNAME $2 $NEWFILENAME $START_FOLDER_COUNT $II $JJ $7 $8
+        FOLDERNAME=$(echo $FOLDERNAME | sed 's/'$FOLDER_FORMER'/'$FOLDER_FORMER''$FOLDER_FORMER'/')
+        (( START_FOLDER_COUNT-- ))
+        mkdir $FOLDERNAME
+        create_one_time $FOLDERNAME $2 $NEWFILENAME $START_FOLDER_COUNT $5 $6 $FOLDERNAME
     done    
 }
 
-cd $1
-create_one_time $NAMING $4 $5 $2 0 0 $NAMING $FILENAME
+create_one_time $NAMING $4 $5 $2 $NAMING $FILENAME $1
