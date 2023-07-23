@@ -1,15 +1,10 @@
 #!/bin/bash
+source ../regexps.sh
 
 NAMING=$3
 FULLNAME=$(echo $5 | sed 's/\./ /') 
 FILENAME=$(echo $FULLNAME | awk '{print $1}')
 EXTENSION_NAME=$(echo $FULLNAME | awk '{print $2}')
-
-MATCH_FOLDER_NAME="^[a-zA-Z]*$"
-MATCH_EXT_NAME="^[a-zA-Z]*$"
-MATCH_NUM="^[\+-]?[0-9]*$"
-MATCH_FILE_NAME="^[A-Za-z]+((\.[a-zA-Z]{1,3}$)|$)"
-MATCH_FILE_NUM="^[\+]?[0-9]*[\.]?[0-9]+$"
 
 E_BADARGS=0
 
