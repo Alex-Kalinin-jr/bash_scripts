@@ -10,6 +10,7 @@ function create_one_time ()
     DIR_PATH=$7
     FILE_FORMER=${REGFILENAME:0:1}
     FOLDER_FORMER=${REGNAMING:0:1}
+    ! [[ $10 -eq 0 ]] && FILECOUNT=echo $(( 1+$RANDOM%100 ))
 
 
     for (( y=1; y<=$FILECOUNT; y++ )); do
