@@ -1,3 +1,5 @@
 #!/bin/bash
 
-NAMING=$1
+source conditions.sh
+
+if dir != /bin and dir != /sbin then func
