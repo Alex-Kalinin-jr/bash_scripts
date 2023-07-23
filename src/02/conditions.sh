@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#02
 source ../regexps.sh
 
 NAMING=$1

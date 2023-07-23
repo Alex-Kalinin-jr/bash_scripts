@@ -8,7 +8,6 @@ function create_one_time ()
     REGNAMING=$5
     REGFILENAME=$6
     DIR_PATH=$7
-
     FILE_FORMER=${REGFILENAME:0:1}
     FOLDER_FORMER=${REGNAMING:0:1}
 
@@ -17,7 +16,7 @@ function create_one_time ()
         FREE_SPACE=$(df -B G / | awk '{print $4}' | sed -e 's/G//')
         FREE_SPACE=$(echo $FREE_SPACE | awk '{print $2}' | sed -n '$p')
         [[ $FREE_SPACE -lt 1 ]] && return #end condition for loop
-        truncate -s $8'K' $NEWFILENAME
+        truncate -s $8"$9" $NEWFILENAME #here to be passed K or M
         EXISTING=$(echo $PWD)
         FOR_LOG=$(echo $NEWFILENAME | sed -e 's/$/'_$8'/')
         FOR_LOG=$(echo | awk -v ONE=$NEWFILENAME -v TWO=$EXISTING '{print ONE"_"TWO}')
@@ -34,6 +33,6 @@ function create_one_time ()
         (( START_FOLDER_COUNT-- ))
         mkdir $FOLDERNAME
         create_one_time $FOLDERNAME $2 $NEWFILENAME \
-            $START_FOLDER_COUNT $5 $6 $FOLDERNAME $8
+            $START_FOLDER_COUNT $5 $6 $FOLDERNAME $8 $9
     done    
 }
