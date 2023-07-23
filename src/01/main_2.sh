@@ -21,13 +21,12 @@ function create_one_time ()
     for (( y=1; y<=$FILECOUNT; y++ )); do
         FREE_SPACE=$(df -B G / | awk '{print $4}' | sed -e 's/G//')
         FREE_SPACE=$(echo $FREE_SPACE | awk '{print $2}' | sed -n '$p')
-        echo $FREE_SPACE
         [[ $FREE_SPACE -lt 1 ]] && return #end condition for loop
         truncate -s $8'K' $NEWFILENAME
         EXISTING=$(echo $PWD)
         FOR_LOG=$(echo $NEWFILENAME | sed -e 's/$/'_$8'/')
-        FOR_LOG=$(awk -v ONE=$NEWFILENAME '{print ONE}')
-        echo $FOR_LOG
+        FOR_LOG=$(echo | awk -v ONE=$NEWFILENAME -v TWO=$EXISTING '{print ONE"_"TWO}')
+        echo $FOR_LOG >> $LOG_LOCATION
         NEWFILENAME=$(echo $NEWFILENAME | \
             sed 's/'$FILE_FORMER'/'$FILE_FORMER''$FILE_FORMER'/')
     done
@@ -43,6 +42,11 @@ function create_one_time ()
             $START_FOLDER_COUNT $5 $6 $FOLDERNAME $8
     done    
 }
+
+
 SCRIPT_DATE=$(date +"%d%m%y")
 NAME_WITH_DATE=$(echo $5 | sed 's/$/'_$SCRIPT_DATE'/')
+LOG_LOCATION="$1/file.log"
+echo $LOG_LOCATION
+touch $LOG_LOCATION
 create_one_time $NAMING $4 $NAME_WITH_DATE $2 $NAMING $FILENAME $1 $6
