@@ -1,46 +1,52 @@
 #!/bin/bash
+source conditions.sh
 
-NAMING=$3
-FULLNAME=$(echo $5 | sed 's/\./ /') 
-FILENAME=$(echo $FULLNAME | awk '{print $1}')
-EXTENSION_NAME=$(echo $FULLNAME | awk '{print $2}')
+test $E_BADARGS -eq 65 && exit $E_BADARGS
 
-MATCH_FOLDER_NAME="^[a-zA-Z]*$"
-MATCH_EXT_NAME="^[a-zA-Z]*$"
-MATCH_NUM="^[\+-]?[0-9]*$"
-MATCH_FILE_NAME="^[A-Za-z]+((\.[a-zA-Z]{1,3}$)|$)"
-MATCH_FILE_NUM="^[\+]?[0-9]*[\.]?[0-9]+$"
+function create_one_time ()
+{
+    cd $7
+    FOLDERNAME=$1
+    FILECOUNT=$2
+    NEWFILENAME=$3
+    START_FOLDER_COUNT=$4
+    REGNAMING=$5
+    REGFILENAME=$6
+    DIR_PATH=$7
 
-E_BADARGS=0
-
-#general
-[[ $# -ne 6 ]] && { echo "There are unspecified arguments">&2; E_BADARGS=65; }
-#first arg
-! [[ -d $1 ]] && { echo "WRONG PATH">&2; E_BADARGS=65; }
-#second arg
-( ! [[ "$2" =~ $MATCH_NUM ]] || [[ $2 -lt 1 ]] ) && { echo "WRONG SUBFOLDERS NUMBER">&2; E_BADARGS=65; }
-#third arg
-( ! [[ "$NAMING" =~ $MATCH_FOLDER_NAME ]] || [[ ${#NAMING} -gt 7 ]] ) && \
-    { echo "WRONG FOLDER NAMING: only latin letters, no more than 7">&2; E_BADARGS=65; }
-# #fourth arg
-! [[ "$4" =~ $MATCH_NUM ]] || [ $4 -lt 1 ] && { echo "WRONG FILES NUMBER">&2; E_BADARGS=65; }
-# #fifth arg
-! [[ "$5" =~ $MATCH_FILE_NAME ]] && \
-    { echo "WRONG FILE/EXT NAMING: only latin letters, \
-no more than 7 for name, no more than 3 for extension">&2; E_BADARGS=65; }
-( [[ ${#FILENAME} -gt 7 ]] || ! [[ "$FILENAME" =~ $MATCH_FOLDER_NAME ]] || [[ ${#FILENAME} -lt 1 ]] ) && \
-    { echo "WRONG FILE NAMING: only latin letters, no more than 7">&2; E_BADARGS=65; }
-( [[ ${#EXTENSION_NAME} -gt 3 ]] || ! [[ "$EXTENSION_NAME" =~ $MATCH_EXT_NAME ]] ) && \
-    { echo "WRONG EXTENSION NAMING: only latin letters, no more than 3">&2; E_BADARGS=65; }
-#six arg
-#  ( ! [[ $6 =~ $MATCH_FILE_NUM ]] || (( $(echo "$6 > 100" | bc -l) )) ) && \
-#     { echo "WRONG FILE SIZE">&2; E_BADARGS=65; }
-#-----------------------------------------------------------
-#  the code above is for decimal nums but user can pass
-#+ decimal num that does not integer num
-#+ in bytes. therefore only integers are permitted.
-#-----------------------------------------------------------
- ( ! [[ $6 =~ $MATCH_NUM ]] || (( $(echo "$6 > 100" | bc -l) )) ) && \
-    { echo "WRONG FILE SIZE">&2; E_BADARGS=65; }
+    FILE_FORMER=${REGFILENAME:0:1}
+    FOLDER_FORMER=${REGNAMING:0:1}
 
 
+    for (( y=1; y<=$FILECOUNT; y++ )); do
+        FREE_SPACE=$(df -B G / | awk '{print $4}' | sed -e 's/G//')
+        FREE_SPACE=$(echo $FREE_SPACE | awk '{print $2}' | sed -n '$p')
+        [[ $FREE_SPACE -lt 1 ]] && return #end condition for loop
+        truncate -s $8'K' $NEWFILENAME
+        EXISTING=$(echo $PWD)
+        FOR_LOG=$(echo $NEWFILENAME | sed -e 's/$/'_$8'/')
+        FOR_LOG=$(echo | awk -v ONE=$NEWFILENAME -v TWO=$EXISTING '{print ONE"_"TWO}')
+        echo $FOR_LOG >> $LOG_LOCATION
+        NEWFILENAME=$(echo $NEWFILENAME | \
+            sed 's/'$FILE_FORMER'/'$FILE_FORMER''$FILE_FORMER'/')
+    done
+
+    [[ $4 -eq 0 ]] && return #end condition for recursy
+
+    for (( y=1; y<=$START_FOLDER_COUNT; y++)); do
+        FOLDERNAME=$(echo $FOLDERNAME | \
+            sed 's/'$FOLDER_FORMER'/'$FOLDER_FORMER''$FOLDER_FORMER'/')
+        (( START_FOLDER_COUNT-- ))
+        mkdir $FOLDERNAME
+        create_one_time $FOLDERNAME $2 $NEWFILENAME \
+            $START_FOLDER_COUNT $5 $6 $FOLDERNAME $8
+    done    
+}
+
+
+SCRIPT_DATE=$(date +"%d%m%y")
+NAME_WITH_DATE=$(echo $5 | sed 's/$/'_$SCRIPT_DATE'/')
+LOG_LOCATION="$1/file.log"
+echo $LOG_LOCATION
+touch $LOG_LOCATION
+create_one_time $NAMING $4 $NAME_WITH_DATE $2 $NAMING $FILENAME $1 $6
