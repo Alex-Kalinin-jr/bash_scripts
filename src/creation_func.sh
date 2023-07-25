@@ -48,13 +48,13 @@ function create_many_times ()
     if ! [[ $(echo $?) -eq 2 ]]
     then 
         for I in $LIST; do
-            CUR_FOLDER=$(echo $PWD)
             [[ "$I" =~ $MATCH_RESTRICTED_FOLDERS ]] && continue
-            F_COUNT=$((1+$RANDOM%100))
-            NEW_FOLDER=$(echo | awk -v ONE=$CUR_FOLDER -v TWO=$I '{print ONE"/"TWO}')
+            NEW_FOLDER=$(echo | awk -v ONE=$1 -v TWO=$I '{print ONE"/"TWO}')
+            echo "new folder is:"
+            echo $NEW_FOLDER
             create_many_times $NEW_FOLDER
-            create_one_time $NAMING $F_COUNT 2 $NAMING $FILENAME $I $3
-            cd $CUR_FOLDER
+            F_COUNT=$((1+$RANDOM%100))
+            create_one_time $NAMING $F_COUNT 2 $NAMING $FILENAME $NEW_FOLDER $3
         done
     fi
     
