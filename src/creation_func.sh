@@ -51,8 +51,6 @@ function create_many_times ()
         for I in $LIST; do
             [[ "$I" =~ $MATCH_RESTRICTED_FOLDERS ]] && continue
             NEW_FOLDER=$(echo | awk -v ONE=$1 -v TWO=$I '{print ONE"/"TWO}')
-            echo "new folder is:"
-            echo $NEW_FOLDER
             create_many_times $NEW_FOLDER
             F_COUNT=$((1+$RANDOM%100))
             create_one_time $NAMING $F_COUNT 2 \
