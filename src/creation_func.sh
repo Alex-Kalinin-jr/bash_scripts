@@ -54,8 +54,7 @@ function create_many_times ()
             echo "new folder is:"
             echo $NEW_FOLDER
             create_many_times $NEW_FOLDER
-            # F_COUNT=$((1+$RANDOM%100))
-            F_COUNT=2
+            F_COUNT=$((1+$RANDOM%100))
             create_one_time $NAMING $F_COUNT 2 \
                             $NAMING $FILENAME $NEW_FOLDER $3 M
         done
