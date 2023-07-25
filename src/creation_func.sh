@@ -19,12 +19,13 @@ function create_one_time ()
         FREE_SPACE=$(echo $FREE_SPACE | awk '{print $2}' | sed -n '$p')
         [[ $FREE_SPACE -lt 1 ]] && return #end condition for loop
 
-        truncate -s $FILESIZE"K" $NAME_WITH_DATE
-        EXISTING=$(echo $PWD)
-        FOR_LOG=$(echo $NAME_WITH_DATE | sed -e 's/$/'_$FILESIZE'/')
-        FOR_LOG=$(echo | awk -v ONE=$NAME_WITH_DATE -v TWO=$EXISTING '{print ONE"_"TWO}')
-        echo $FOR_LOG >> $LOG_LOCATION
-
+        truncate -s $FILESIZE"$8" $NAME_WITH_DATE 2>/dev/null
+        if [[ $(echo $?) -eq 0 ]]; then
+            EXISTING=$(echo $PWD)
+            FOR_LOG=$(echo $NAME_WITH_DATE | sed -e 's/$/'_$FILESIZE'/')
+            FOR_LOG=$(echo | awk -v ONE=$NAME_WITH_DATE -v TWO=$EXISTING '{print ONE"_"TWO}')
+            echo $FOR_LOG >> $LOG_LOCATION
+        fi
         NAME_WITH_DATE=$(echo $NAME_WITH_DATE | \
             sed 's/'$FILE_FORMER'/'$FILE_FORMER''$FILE_FORMER'/')
     done
@@ -44,7 +45,7 @@ function create_one_time ()
 function create_many_times ()
 {
     cd $1
-    LIST=$(ls -d */)
+    LIST=$(ls -d */) 2>/dev/null
     if ! [[ $(echo $?) -eq 2 ]]
     then 
         for I in $LIST; do
@@ -53,8 +54,10 @@ function create_many_times ()
             echo "new folder is:"
             echo $NEW_FOLDER
             create_many_times $NEW_FOLDER
-            F_COUNT=$((1+$RANDOM%100))
-            create_one_time $NAMING $F_COUNT 2 $NAMING $FILENAME $NEW_FOLDER $3
+            # F_COUNT=$((1+$RANDOM%100))
+            F_COUNT=2
+            create_one_time $NAMING $F_COUNT 2 \
+                            $NAMING $FILENAME $NEW_FOLDER $3 M
         done
     fi
     
