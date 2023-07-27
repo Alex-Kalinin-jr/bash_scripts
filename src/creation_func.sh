@@ -1,6 +1,7 @@
 function create_one_time ()
 {
     cd $3
+    echo "params are: $1    $2  $3"
     NEWNAME=$INITIAL_NAME
     FOLDERNAME=$(echo $1)
     for (( y=1; y<=$FILECOUNT; y++ )); do
@@ -18,7 +19,7 @@ function create_one_time ()
             FOR_LOG=$(echo | awk -v ONE=$NAME_WITH_DATE -v TWO=$EXISTING '{print ONE"_"TWO}')
             echo $FOR_LOG >> $LOG_LOCATION
             NEWNAME=$(echo $NEWNAME | \
-                sed 's/'$FILE_FORMER'/'$FILE_FORMER''$FILE_FORMER'/')
+                sed 's/\(.*\)'$FILE_FORMER'/\1'$FILE_FORMER''$FILE_FORMER'/')
         fi
     done
 
@@ -26,28 +27,30 @@ function create_one_time ()
 
     for (( y=1; y<=$START_FOLDER_COUNT; y++)); do
         FOLDERNAME=$(echo $FOLDERNAME | \
-            sed 's/'$FOLDER_FORMER'/'$FOLDER_FORMER''$FOLDER_FORMER'/')
+            sed 's/\(.*\)'$FOLDER_FORMER'/\1'$FOLDER_FORMER''$FOLDER_FORMER'/')
         (( START_FOLDER_COUNT-- ))
         mkdir "$FOLDERNAME"
-        create_one_time "$FOLDERNAME" "K" "$FOLDERNAME"
+        create_one_time "$FOLDERNAME" "$2" "$FOLDERNAME"
     done    
 }
 
 function create_many_times ()
 {
-    cd $1
-    (($2++))
-    LIST=$(ls -d */)
+    cd "$1"
+    echo "now we are in $PWD"
+    LIST=$(ls -d */) 2> /dev/null
+    mkdir "$REGNAMING"
+    FILECOUNT=$((1+$RANDOM%100))
+    create_one_time "$REGNAMING" "M" "$REGNAMING"
     if ! [[ $(echo $?) -eq 2 ]]
     then 
         for I in $LIST; do
             [[ "$I" =~ $MATCH_RESTRICTED_FOLDERS ]] && continue
-            F_COUNT=$((1+$RANDOM%100))
+            [[ "$I" =~ $REGNAMING ]] && continue
             NEW_FOLDER=$(echo | awk -v ONE=$1 -v TWO=$I '{print ONE"/"TWO}')
-            echo "$NEW_FOLDER----------------->$2"
-            create_many_times $NEW_FOLDER $2
-            create_one_time "$REGNAMING" "M" "" 
+            create_many_times $NEW_FOLDER
         done
     fi
     
 }
+# bash main.sh ab cd.ef 30 

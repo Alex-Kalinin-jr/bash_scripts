@@ -6,13 +6,11 @@ REGNAMING=$1
 INITIAL_NAME=$2
 START_FOLDER_COUNT=100
 FULLNAME=$(echo $2 | sed 's/\./ /') 
-FILENAME=$(echo $FULLNAME | awk '{print $1}')
-REGFILENAME=$FILENAME
+REGFILENAME=$(echo $FULLNAME | awk '{print $1}')
 FILE_FORMER=${REGFILENAME:0:1}
 FOLDER_FORMER=${REGNAMING:0:1}
 EXTENSION_NAME=$(echo $FULLNAME | awk '{print $2}')
-FILESIZE=$6
-FILECOUNT=$4
+FILESIZE=$3
 SCRIPT_DATE=$(date +"%d%m%y")
 
 E_BADARGS=0
@@ -24,7 +22,7 @@ E_BADARGS=0
 ! [[ "$2" =~ $MATCH_FILE_NAME ]] && \
     { echo "WRONG FILE/EXT NAMING: only latin letters, \
 no more than 7 for name, no more than 3 for extension">&2; E_BADARGS=65; }
-( [[ ${#FILENAME} -gt 7 ]] || ! [[ "$FILENAME" =~ $MATCH_FOLDER_NAME ]] || [[ ${#FILENAME} -lt 1 ]] ) && \
+( [[ ${#REGFILENAME} -gt 7 ]] || ! [[ "$REGFILENAME" =~ $MATCH_FOLDER_NAME ]] || [[ ${#REGFILENAME} -lt 1 ]] ) && \
     { echo "WRONG FILE NAMING: only latin letters, no more than 7">&2; E_BADARGS=65; }
 ( [[ ${#EXTENSION_NAME} -gt 3 ]] || ! [[ "$EXTENSION_NAME" =~ $MATCH_EXT_NAME ]] ) && \
     { echo "WRONG EXTENSION NAMING: only latin letters, no more than 3">&2; E_BADARGS=65; }
