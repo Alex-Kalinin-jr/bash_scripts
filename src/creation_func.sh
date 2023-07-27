@@ -1,35 +1,24 @@
 function create_one_time ()
 {
-    cd $6
-    SCRIPT_DATE=$(date +"%d%m%y")
-    NEWNAME=$(echo | awk -v A=$5 -v B=$9 '{print A"."B}')
-    FILECOUNT=$2
-    FILESIZE=$7
-
-    FOLDERNAME=$1
-    START_FOLDER_COUNT=$3
-    
-    REGNAMING=$4
-    REGFILENAME=$5
-    FILE_FORMER=${REGFILENAME:0:1}
-    FOLDER_FORMER=${REGNAMING:0:1}
-
+    cd $3
+    NEWNAME=$INITIAL_NAME
+    FOLDERNAME=$(echo $1)
     for (( y=1; y<=$FILECOUNT; y++ )); do
         FREE_SPACE=$(df -B G / | awk '{print $4}' | sed -e 's/G//')
         FREE_SPACE=$(echo $FREE_SPACE | awk '{print $2}' | sed -n '$p')
         [[ $FREE_SPACE -lt 1 ]] && return #end condition for loop
 
-        truncate -s $FILESIZE"$8" $NEWNAME 2>/dev/null
+        truncate -s $FILESIZE"$2" $NEWNAME 2>/dev/null #HERE
         CHECK_TRUNC=$(echo $?)
-        NAME_WITH_DATE=$(echo $NEWNAME | sed 's/$/'_$SCRIPT_DATE'/')
         if [[ $CHECK_TRUNC -eq 0 ]]; then
+            NAME_WITH_DATE=$(echo $NEWNAME | sed 's/$/'_$SCRIPT_DATE'/')
             EXISTING=$(echo $PWD)
             FOR_LOG=$(echo $NAME_WITH_DATE | sed -e 's/$/'_$FILESIZE'/')
             FOR_LOG=$(echo | awk -v ONE=$NAME_WITH_DATE -v TWO=$EXISTING '{print ONE"_"TWO}')
             echo $FOR_LOG >> $LOG_LOCATION
+            NEWNAME=$(echo $NEWNAME | \
+                sed 's/'$FILE_FORMER'/'$FILE_FORMER''$FILE_FORMER'/')
         fi
-        NEWNAME=$(echo $NEWNAME | \
-            sed 's/'$FILE_FORMER'/'$FILE_FORMER''$FILE_FORMER'/')
     done
 
     [[ $START_FOLDER_COUNT -eq 0 ]] && return #end condition for recursy
@@ -38,9 +27,8 @@ function create_one_time ()
         FOLDERNAME=$(echo $FOLDERNAME | \
             sed 's/'$FOLDER_FORMER'/'$FOLDER_FORMER''$FOLDER_FORMER'/')
         (( START_FOLDER_COUNT-- ))
-        mkdir $FOLDERNAME
-        create_one_time $FOLDERNAME $2 $START_FOLDER_COUNT $REGNAMING $REGFILENAME \
-            $FOLDERNAME $FILESIZE K $9
+        mkdir "$FOLDERNAME"
+        create_one_time "$FOLDERNAME" "K" "$FOLDERNAME"
     done    
 }
 

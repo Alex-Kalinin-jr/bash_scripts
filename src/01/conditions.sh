@@ -2,10 +2,18 @@
 #01
 source ../regexps.sh
 
-NAMING=$3
+REGNAMING=$3
+INITIAL_NAME=$5
+START_FOLDER_COUNT=$2
 FULLNAME=$(echo $5 | sed 's/\./ /') 
 FILENAME=$(echo $FULLNAME | awk '{print $1}')
+REGFILENAME=$FILENAME
+FILE_FORMER=${REGFILENAME:0:1}
+FOLDER_FORMER=${REGNAMING:0:1}
 EXTENSION_NAME=$(echo $FULLNAME | awk '{print $2}')
+FILESIZE=$6
+FILECOUNT=$4
+SCRIPT_DATE=$(date +"%d%m%y")
 
 E_BADARGS=0
 
@@ -16,7 +24,7 @@ E_BADARGS=0
 #second arg
 ( ! [[ "$2" =~ $MATCH_NUM ]] || [[ $2 -lt 1 ]] ) && { echo "WRONG SUBFOLDERS NUMBER">&2; E_BADARGS=65; }
 #third arg
-( ! [[ "$NAMING" =~ $MATCH_FOLDER_NAME ]] || [[ ${#NAMING} -gt 7 ]] ) && \
+( ! [[ "$REGNAMING" =~ $MATCH_FOLDER_NAME ]] || [[ ${#REGNAMING} -gt 7 ]] ) && \
     { echo "WRONG FOLDER NAMING: only latin letters, no more than 7">&2; E_BADARGS=65; }
 # #fourth arg
 ! [[ "$4" =~ $MATCH_NUM ]] || [ $4 -lt 1 ] && { echo "WRONG FILES NUMBER">&2; E_BADARGS=65; }
