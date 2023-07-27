@@ -11,4 +11,4 @@ touch $LOG_LOCATION
 #+is regpattern for first NAMING evolution.
 #+six arg is absoliute path at start and (o_O) created folder name
 #+inside recursy for deep diving
-create_one_time $NAMING $4 $2 $NAMING $FILENAME $1 $6 K
+create_one_time $NAMING $4 $2 $NAMING $FILENAME $1 $6 K $EXTENSION_NAME
