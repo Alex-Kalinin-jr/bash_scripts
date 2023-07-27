@@ -8,8 +8,9 @@ function create_one_time ()
         FREE_SPACE=$(echo $FREE_SPACE | awk '{print $2}' | sed -n '$p')
         [[ $FREE_SPACE -lt 1 ]] && return #end condition for loop
 
-        truncate -s $FILESIZE"$2" $NEWNAME 2>/dev/null #HERE
+        truncate -s $FILESIZE"$2" $NEWNAME 2>/dev/null
         CHECK_TRUNC=$(echo $?)
+
         if [[ $CHECK_TRUNC -eq 0 ]]; then
             NAME_WITH_DATE=$(echo $NEWNAME | sed 's/$/'_$SCRIPT_DATE'/')
             EXISTING=$(echo $PWD)
@@ -45,8 +46,7 @@ function create_many_times ()
             NEW_FOLDER=$(echo | awk -v ONE=$1 -v TWO=$I '{print ONE"/"TWO}')
             echo "$NEW_FOLDER----------------->$2"
             create_many_times $NEW_FOLDER $2
-            create_one_time $NAMING $F_COUNT 100 \
-                            $NAMING $FILENAME $NEW_FOLDER $3 M $EXTENSION_NAME
+            create_one_time "$REGNAMING" "M" "" 
         done
     fi
     
