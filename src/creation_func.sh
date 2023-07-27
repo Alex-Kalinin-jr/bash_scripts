@@ -20,8 +20,9 @@ function create_one_time ()
         [[ $FREE_SPACE -lt 1 ]] && return #end condition for loop
 
         truncate -s $FILESIZE"$8" $NEWNAME 2>/dev/null
+        CHECK_TRUNC=$(echo $?)
         NAME_WITH_DATE=$(echo $NEWNAME | sed 's/$/'_$SCRIPT_DATE'/')
-        if [[ $(echo $?) -eq 0 ]]; then
+        if [[ $CHECK_TRUNC -eq 0 ]]; then
             EXISTING=$(echo $PWD)
             FOR_LOG=$(echo $NAME_WITH_DATE | sed -e 's/$/'_$FILESIZE'/')
             FOR_LOG=$(echo | awk -v ONE=$NAME_WITH_DATE -v TWO=$EXISTING '{print ONE"_"TWO}')
@@ -46,6 +47,7 @@ function create_one_time ()
 function create_many_times ()
 {
     cd $1
+    (($2++))
     LIST=$(ls -d */)
     if ! [[ $(echo $?) -eq 2 ]]
     then 
@@ -53,7 +55,8 @@ function create_many_times ()
             [[ "$I" =~ $MATCH_RESTRICTED_FOLDERS ]] && continue
             F_COUNT=$((1+$RANDOM%100))
             NEW_FOLDER=$(echo | awk -v ONE=$1 -v TWO=$I '{print ONE"/"TWO}')
-            create_many_times $NEW_FOLDER
+            echo "$NEW_FOLDER----------------->$2"
+            create_many_times $NEW_FOLDER $2
             create_one_time $NAMING $F_COUNT 100 \
                             $NAMING $FILENAME $NEW_FOLDER $3 M $EXTENSION_NAME
         done
