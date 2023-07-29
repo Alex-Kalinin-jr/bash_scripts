@@ -37,7 +37,7 @@ function create_many_times ()
 {
     cd "$1"
     echo "now we are in $PWD"
-    LIST=$(ls -d */) 2> /dev/null
+    LIST=$(ls -d */ 2> /dev/null) 
     START_FOLDER_COUNT=100
     mkdir "$REGNAMING"
     FILECOUNT=$((1+$RANDOM%100))
@@ -53,5 +53,3 @@ function create_many_times ()
     fi
     
 }
-# bash main.sh ab cd.ef 30
-# git commit -a -m 'recursy of 1 func to be repaired for 2nd script.'
