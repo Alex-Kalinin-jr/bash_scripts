@@ -1,7 +1,6 @@
 function create_one_time ()
 {
     cd $3
-    echo "params are: $1    $2  $3"
     NEWNAME=$INITIAL_NAME
     FOLDERNAME=$(echo $1)
     for (( y=1; y<=$FILECOUNT; y++ )); do
@@ -39,6 +38,7 @@ function create_many_times ()
     cd "$1"
     echo "now we are in $PWD"
     LIST=$(ls -d */) 2> /dev/null
+    START_FOLDER_COUNT=100
     mkdir "$REGNAMING"
     FILECOUNT=$((1+$RANDOM%100))
     create_one_time "$REGNAMING" "M" "$REGNAMING"
@@ -53,4 +53,5 @@ function create_many_times ()
     fi
     
 }
-# bash main.sh ab cd.ef 30 
+# bash main.sh ab cd.ef 30
+# git commit -a -m 'recursy of 1 func to be repaired for 2nd script.'
