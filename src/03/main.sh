@@ -19,15 +19,17 @@ if [[ $1 -eq 1 ]]; then
 fi
 
 if [[ $1 -eq 2 ]]; then
-    ( [[ $(echo $#) -eq 5 ]] && { D1=$2; T1=$3; D2=$4; T2=$5; } ) || \
+    [[ $(echo $#) -eq 5 ]] && { D1=$2; T1=$3; D2=$4; T2=$5; }  || \
         {
             read -p "write start date (YYYY/MM/DD HH:MM): " D1 T1; 
             read -p "write start date (YYYY/MM/DD HH:MM): " D2 T2; 
             check_and_compare_2_dates $D1 $T1 $D2 $T2;
         }
-        # FILELIST=$(find / -newermt "$D1 $T1" ! -newermt "$D2 $T2" 2>/dev/null);
-        find / -newermt "$D1 $T1" ! -newermt "$D2 $T2" 2>/dev/null;
-        echo "$FILELIST";
+        FILELIST=$(find / -newermt "$D1 $T1" ! -newermt "$D2 $T2" 2>/dev/null);
+        for line in $FILELIST
+        do
+            rm -f "$line" 2>/err.log
+        done
 fi
 
 exit $E_BADARGS;
