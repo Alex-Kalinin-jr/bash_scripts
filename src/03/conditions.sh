@@ -10,10 +10,11 @@ E_BADARGS=0
 #first arg
 ( ! [[ $1 -eq 1 ]] && ! [[ $1 -eq 2 ]] && ! [[ $1 -eq 3 ]] ) \
     && { echo "smth goes wrong"; exit 1; }
+#5 args case
 ( [[ $1 -eq 3 ]] && [[ $(echo $# -eq 5) ]] ) && \
-    { DATE_START=$(echo $2); \
-    d=${DATE_START:0:2}; \
-    m=${DATE_START:3:5}; \
-    Y=${DATE_START:6:10}; \
-    echo "mont=$m"
-    if date -d "$Y-$m-$d" &> /dev/null; then echo VALID; else echo INVALID; fi; }
+    {
+        ( date --date="$2 $3" "+%d-%m-%Y %H:%M start" 2> /dev/null && \
+        date --date="$4 $5" "+%d-%m-%Y %H:%M end" 2> /dev/null ) || \
+        echo "WRONG DATE TIME FORMAT: should be YYYY/MM/DD and HH:MM"; 
+     }
+
