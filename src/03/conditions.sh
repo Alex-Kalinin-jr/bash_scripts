@@ -12,7 +12,7 @@ E_BADARGS=0
 ( ! [[ $1 -eq 1 ]] && ! [[ $1 -eq 2 ]] && ! [[ $1 -eq 3 ]] ) \
     && { echo "smth goes wrong"; exit 1; }
 #5 args case
-( [[ $1 -eq 3 ]] && [[ $(echo $# -eq 5) ]] ) && \
+( [[ $1 -eq 2 ]] && [[ $(echo $# -eq 5) ]] ) && \
     {
     check_and_compare_2_dates $2 $3 $4 $5;
     [[ $(echo $?) -eq 0 ]] || exit $E_BADARGS
