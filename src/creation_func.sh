@@ -8,11 +8,11 @@ function create_one_time ()
         FREE_SPACE=$(echo $FREE_SPACE | awk '{print $2}' | sed -n '$p')
         [[ $FREE_SPACE -lt 1 ]] && return #end condition for loop
 
-        truncate -s $FILESIZE"$2" $NEWNAME 2>/dev/null
+        NAME_WITH_DATE=$(echo $NEWNAME | sed 's/$/'_$SCRIPT_DATE'/')
+        truncate -s $FILESIZE"$2" $NAME_WITH_DATE 2>/dev/null
         CHECK_TRUNC=$(echo $?)
 
         if [[ $CHECK_TRUNC -eq 0 ]]; then
-            NAME_WITH_DATE=$(echo $NEWNAME | sed 's/$/'_$SCRIPT_DATE'/')
             EXISTING=$(echo $PWD)
             FOR_LOG=$(echo $NAME_WITH_DATE | sed -e 's/$/'_$FILESIZE'/')
             FOR_LOG=$(echo | awk -v ONE=$NAME_WITH_DATE -v TWO=$EXISTING '{print ONE"_"TWO}')
@@ -59,7 +59,7 @@ check_and_compare_2_dates ()
     ( START=$(date --date="$1 $2" "+%d-%m-%Y %H:%M start" 2> /dev/null) && \
     END=$(date --date="$3 $4" "+%d-%m-%Y %H:%M end" 2> /dev/null) ) || \
     { echo "WRONG DATE TIME FORMAT: should be YYYY/MM/DD and HH:MM"; E_BADARGS=65; }
-#then compares date interval for correctness
+    #then compares date interval for correctness
     if ! [[ $E_BADARGS -eq 65 ]]; then
     START=$(date --date="$1 $2" +%s) 
     END=$(date --date="$3 $4" +%s) 

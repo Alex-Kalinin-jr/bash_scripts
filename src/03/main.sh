@@ -13,7 +13,7 @@ if [[ $1 -eq 1 ]]; then
         { echo "WRONG PATH">&2; E_BADARGS=65; exit $E_BADARGS; }  
     while read line
     do
-        TO_DEL=$(echo $line | awk 'BEGIN { FS = "_" } ; {print substr($3, $NF)"/"$1}')
+        TO_DEL=$(echo $line | awk 'BEGIN { FS = "_" } ; {print substr($3, $NF)"/"$1"_"$2}')
         rm -f "$TO_DEL" 2>/err.log
     done < $LOG_LOCATION
 fi
