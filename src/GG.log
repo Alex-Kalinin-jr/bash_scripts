@@ -1,0 +1,100 @@
+Jul 30 20:00:23 debian gdm-password]: gkr-pam: gnome-keyring-daemon started properly and unlocked keyring
+Jul 30 20:00:28 debian polkitd(authority=local): Registered Authentication Agent for unix-session:2 (system bus name :1.89 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+Jul 30 20:00:33 debian polkitd(authority=local): Unregistered Authentication Agent for unix-session:c2 (system bus name :1.48, object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8) (disconnected from bus)
+Jul 30 20:00:33 debian realmd[2187]: quitting realmd service after timeout
+Jul 30 20:00:33 debian realmd[2187]: stopping service
+Jul 30 20:00:33 debian gdm-launch-environment]: pam_unix(gdm-launch-environment:session): session closed for user Debian-gdm
+Jul 30 20:00:33 debian systemd-logind[726]: Session c2 logged out. Waiting for processes to exit.
+Jul 30 20:00:33 debian systemd-logind[726]: Removed session c2.
+Jul 30 20:00:35 debian PackageKit: uid 1000 is trying to obtain org.freedesktop.packagekit.system-sources-refresh auth (only_trusted:0)
+Jul 30 20:00:35 debian PackageKit: uid 1000 obtained auth for org.freedesktop.packagekit.system-sources-refresh
+Jul 30 20:01:46 debian gnome-keyring-daemon[2288]: asked to register item /org/freedesktop/secrets/collection/login/1, but it's already registered
+Jul 30 20:05:01 debian CRON[15896]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 20:05:01 debian CRON[15896]: pam_unix(cron:session): session closed for user root
+Jul 30 20:09:01 debian CRON[16718]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 20:09:02 debian CRON[16718]: pam_unix(cron:session): session closed for user root
+Jul 30 20:11:02 debian gnome-keyring-daemon[2288]: asked to register item /org/freedesktop/secrets/collection/login/1, but it's already registered
+Jul 30 20:15:01 debian CRON[18133]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 20:15:02 debian CRON[18133]: pam_unix(cron:session): session closed for user root
+Jul 30 20:17:01 debian CRON[18152]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 20:17:01 debian CRON[18152]: pam_unix(cron:session): session closed for user root
+Jul 30 20:25:02 debian CRON[18194]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 20:25:02 debian CRON[18194]: pam_unix(cron:session): session closed for user root
+Jul 30 20:30:01 debian CRON[18225]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 20:30:01 debian CRON[18225]: pam_unix(cron:session): session closed for user root
+Jul 30 20:35:01 debian CRON[18247]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 20:35:01 debian CRON[18247]: pam_unix(cron:session): session closed for user root
+Jul 30 20:39:01 debian CRON[18264]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 20:39:01 debian CRON[18264]: pam_unix(cron:session): session closed for user root
+Jul 30 20:45:01 debian CRON[18339]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 20:45:01 debian CRON[18339]: pam_unix(cron:session): session closed for user root
+Jul 30 20:55:01 debian CRON[18378]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 20:55:01 debian CRON[18378]: pam_unix(cron:session): session closed for user root
+Jul 30 21:05:01 debian CRON[18447]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 21:05:01 debian CRON[18447]: pam_unix(cron:session): session closed for user root
+Jul 30 21:09:01 debian CRON[18468]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 21:09:01 debian CRON[18468]: pam_unix(cron:session): session closed for user root
+Jul 30 21:15:01 debian CRON[18550]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 21:15:01 debian CRON[18550]: pam_unix(cron:session): session closed for user root
+Jul 30 21:17:01 debian CRON[18572]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 21:17:01 debian CRON[18572]: pam_unix(cron:session): session closed for user root
+Jul 30 21:18:06 debian gdm-password]: gkr-pam: unlocked login keyring
+Jul 30 21:25:01 debian CRON[19302]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 21:25:01 debian CRON[19302]: pam_unix(cron:session): session closed for user root
+Jul 30 21:30:01 debian CRON[19945]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 21:30:01 debian CRON[19945]: pam_unix(cron:session): session closed for user root
+Jul 30 21:35:01 debian CRON[20590]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 21:35:01 debian CRON[20590]: pam_unix(cron:session): session closed for user root
+Jul 30 21:39:01 debian CRON[21642]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 21:39:01 debian CRON[21642]: pam_unix(cron:session): session closed for user root
+Jul 30 21:45:01 debian CRON[21923]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 21:45:01 debian CRON[21923]: pam_unix(cron:session): session closed for user root
+Jul 30 21:55:01 debian CRON[23220]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 21:55:01 debian CRON[23220]: pam_unix(cron:session): session closed for user root
+Jul 30 22:05:01 debian CRON[24156]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 22:05:01 debian CRON[24156]: pam_unix(cron:session): session closed for user root
+Jul 30 22:09:01 debian CRON[24468]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 22:09:01 debian CRON[24468]: pam_unix(cron:session): session closed for user root
+Jul 30 22:15:01 debian CRON[25023]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 22:15:01 debian CRON[25023]: pam_unix(cron:session): session closed for user root
+Jul 30 22:17:01 debian CRON[25176]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 22:17:01 debian CRON[25176]: pam_unix(cron:session): session closed for user root
+Jul 30 22:25:01 debian CRON[46023]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 22:25:01 debian CRON[46023]: pam_unix(cron:session): session closed for user root
+Jul 30 22:30:01 debian CRON[46396]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 22:30:01 debian CRON[46396]: pam_unix(cron:session): session closed for user root
+Jul 30 22:35:01 debian CRON[46677]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 22:35:01 debian CRON[46677]: pam_unix(cron:session): session closed for user root
+Jul 30 22:39:01 debian CRON[46797]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 22:39:01 debian CRON[46797]: pam_unix(cron:session): session closed for user root
+Jul 30 22:45:01 debian CRON[46931]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 22:45:01 debian CRON[46931]: pam_unix(cron:session): session closed for user root
+Jul 30 22:51:52 debian gdm-password]: gkr-pam: unlocked login keyring
+Jul 30 22:55:01 debian CRON[47290]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 22:55:01 debian CRON[47290]: pam_unix(cron:session): session closed for user root
+Jul 30 22:55:23 debian sudo:   alexey : TTY=pts/0 ; PWD=/home/alexey/projects/lm2.0/src ; USER=root ; COMMAND=/usr/bin/cat /var/log/nginx/access.log
+Jul 30 22:55:23 debian sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Jul 30 22:55:23 debian sudo: pam_unix(sudo:session): session closed for user root
+Jul 30 23:05:01 debian CRON[47442]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 23:05:01 debian CRON[47442]: pam_unix(cron:session): session closed for user root
+Jul 30 23:09:01 debian CRON[47466]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 23:09:01 debian CRON[47466]: pam_unix(cron:session): session closed for user root
+Jul 30 23:09:58 debian gdm-password]: gkr-pam: unlocked login keyring
+Jul 30 23:10:19 debian sudo:   alexey : TTY=pts/0 ; PWD=/home/alexey/projects/lm2.0/src ; USER=root ; COMMAND=/usr/bin/cat /var/log/auth.log
+Jul 30 23:10:19 debian sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Jul 30 23:10:19 debian sudo: pam_unix(sudo:session): session closed for user root
+Jul 30 23:15:01 debian CRON[47711]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 23:15:01 debian CRON[47711]: pam_unix(cron:session): session closed for user root
+Jul 30 23:17:01 debian CRON[47892]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Jul 30 23:17:01 debian CRON[47892]: pam_unix(cron:session): session closed for user root
+Jul 30 23:19:12 debian sudo:   alexey : TTY=pts/0 ; PWD=/home/alexey/projects/lm2.0/src ; USER=root ; COMMAND=/usr/bin/tail -n 100 /var/log/auth.log /home/alexey/loGG.log
+Jul 30 23:19:12 debian sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Jul 30 23:19:12 debian sudo: pam_unix(sudo:session): session closed for user root
+Jul 30 23:19:22 debian sudo:   alexey : TTY=pts/0 ; PWD=/home/alexey/projects/lm2.0/src ; USER=root ; COMMAND=/usr/bin/tail -n 100 /var/log/auth.log
+Jul 30 23:19:22 debian sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Jul 30 23:19:22 debian sudo: pam_unix(sudo:session): session closed for user root
+Jul 30 23:19:40 debian sudo:   alexey : TTY=pts/0 ; PWD=/home/alexey/projects/lm2.0/src ; USER=root ; COMMAND=/usr/bin/tail -n 100 /var/log/auth.log
+Jul 30 23:19:40 debian sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Jul 30 23:19:40 debian sudo: pam_unix(sudo:session): session closed for user root
+Jul 30 23:22:11 debian sudo:   alexey : TTY=pts/0 ; PWD=/home/alexey/projects/lm2.0/src ; USER=root ; COMMAND=/usr/bin/tail -n 100 /var/log/auth.log
+Jul 30 23:22:11 debian sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
