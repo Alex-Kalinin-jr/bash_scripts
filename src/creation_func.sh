@@ -50,6 +50,23 @@ function create_many_times ()
             NEW_FOLDER=$(echo | awk -v ONE=$1 -v TWO=$I '{print ONE"/"TWO}')
             create_many_times $NEW_FOLDER
         done
+    fi 
+}
+
+#at first func checks dates for correctness
+check_and_compare_2_dates ()
+{
+    ( START=$(date --date="$1 $2" "+%d-%m-%Y %H:%M start" 2> /dev/null) && \
+    END=$(date --date="$3 $4" "+%d-%m-%Y %H:%M end" 2> /dev/null) ) || \
+    { echo "WRONG DATE TIME FORMAT: should be YYYY/MM/DD and HH:MM"; E_BADARGS=65; }
+#then compares date interval for correctness
+    if ! [[ $E_BADARGS -eq 65 ]]; then
+    START=$(date --date="$1 $2" +%s) 
+    END=$(date --date="$3 $4" +%s) 
+        if [[ $START -ge $END ]]; then
+            echo "WRONG: LAST DATE IS EARLIER"; E_BADARGS=1; return 1;
+        else
+            return 0;
+        fi
     fi
-    
 }

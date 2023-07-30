@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source ../regexps.sh
+source ../creation_func.sh
 
 E_BADARGS=0
 
@@ -13,8 +14,6 @@ E_BADARGS=0
 #5 args case
 ( [[ $1 -eq 3 ]] && [[ $(echo $# -eq 5) ]] ) && \
     {
-        ( date --date="$2 $3" "+%d-%m-%Y %H:%M start" 2> /dev/null && \
-        date --date="$4 $5" "+%d-%m-%Y %H:%M end" 2> /dev/null ) || \
-        echo "WRONG DATE TIME FORMAT: should be YYYY/MM/DD and HH:MM"; 
-     }
-
+    check_and_compare_2_dates $2 $3 $4 $5;
+    [[ $(echo $?) -eq 0 ]] || exit $E_BADARGS
+    }
