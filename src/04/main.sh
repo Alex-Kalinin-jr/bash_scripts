@@ -11,6 +11,7 @@ NEW_IP=$(printf "%d.%d.%d.%d\n" \
  #+Chrome/109.0.5414.119 Safari/537.36"
 
 NEW_TIME=$(ran_time)
-NEW_INDEX=$(ran_code)
+NEW_CODE=$(ran_code)
 NEW_PROTO=$(ran_proto)
-echo "${NEW_IP} - - [${NEW_TIME}] \"${NEW_INDEX} / ${NEW_PROTO}\""
+NEW_METHOD=$(ran_method)
+echo "${NEW_IP} - - [${NEW_TIME}] \"${NEW_METHOD} / ${NEW_PROTO}\" ${NEW_CODE}"
