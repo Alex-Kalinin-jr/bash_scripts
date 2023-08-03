@@ -1,8 +1,7 @@
 #! /bin/bash
 
-source arrays.sh
 source ../regexps.sh
-source dt_generator.sh
+source values_generator.sh
 
 # while [[  ]]
 NEW_IP=$(printf "%d.%d.%d.%d\n" \
@@ -11,4 +10,7 @@ NEW_IP=$(printf "%d.%d.%d.%d\n" \
  #+"-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) 
  #+Chrome/109.0.5414.119 Safari/537.36"
 
-ran_time
+NEW_TIME=$(ran_time)
+NEW_INDEX=$(ran_code)
+NEW_PROTO=$(ran_proto)
+echo "${NEW_IP} - - [${NEW_TIME}] \"${NEW_INDEX} / ${NEW_PROTO}\""

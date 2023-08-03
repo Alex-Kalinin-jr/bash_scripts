@@ -1,8 +1,9 @@
 #! /bin/bash
 
- CODES_PUT=( 201 204 400 401 403 404 500 501 502 503 )
- METHODS=( GET POST PUT PATCH DELETE )
- AGENTS=( Chrome , Edge , Firefox , Opera )
+CODES=( 201 204 400 401 403 404 500 501 502 503 )
+METHODS=( GET POST PUT PATCH DELETE )
+AGENTS=( Chrome , Edge , Firefox , Opera )
+VERSIONS=( HTTP/1.1 HTTP/2 HTTP/3 )
 
 #200 - OK
 #+Standard response for successful HTTP requests.
