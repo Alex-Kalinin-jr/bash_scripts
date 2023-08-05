@@ -1,4 +1,4 @@
-,#! /bin/bash
+#! /bin/bash
 
 CODES=( 201 204 400 401 403 404 500 501 502 503 )
 METHODS=( GET POST PUT PATCH DELETE )
