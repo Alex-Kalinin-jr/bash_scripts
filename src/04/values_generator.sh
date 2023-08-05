@@ -19,15 +19,9 @@ random_number()
     echo ${num}
 }
 
-start_ymd()
-{
-    ymd=`date -d "24 hours ago" +%Y-%m-%d`
-    echo ${ymd}
-}
-
 ran_time()
 {
-    a=$(start_ymd)
+    a=$(date -d "24 hours ago" +%Y-%m-%d)
     b=$(random_number 23)
     c=$(random_number 59)
     d=$(random_number 59)
