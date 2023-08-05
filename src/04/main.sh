@@ -2,6 +2,7 @@
 
 source ../regexps.sh
 source values_generator.sh
+source arrays.sh
 
 URLS_FILE="sites_list.txt"
 AGENTS_FILE="user_agents.txt"
