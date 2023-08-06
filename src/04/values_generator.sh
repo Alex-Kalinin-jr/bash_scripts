@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source arrays.sh
-
 ran_ip() 
 {
 new_ip=$(printf "%d.%d.%d.%d\n" \
@@ -19,6 +17,7 @@ random_number()
     echo ${num}
 }
 
+#between 24h ago and now
 ran_time()
 {
     a=$(date -d "24 hours ago" +%s)
@@ -28,6 +27,7 @@ ran_time()
     echo ${time1}
 }
 
+#array is $1 "${METHODS[@]}"
 random_array_record()
 {
     arr=("$@")
@@ -37,6 +37,7 @@ random_array_record()
     echo ${RAN_CODE}
 }
 
+#filename is $1 ${URLS_FILE}
 ran_line()
 {
     SOURCE_FILE=$1
