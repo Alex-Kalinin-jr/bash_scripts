@@ -11,9 +11,9 @@ NEW_IP=$(printf "%d.%d.%d.%d\n" \
     "$((RANDOM % 256))" "$((RANDOM % 256))" \
     "$((RANDOM % 256))" "$((RANDOM % 256))")
 NEW_TIME=$(ran_time)
-NEW_CODE=$(ran_code)
-NEW_PROTO=$(ran_proto)
-NEW_METHOD=$(ran_method)
+NEW_CODE=$(random_array_record "${CODES[@]}")
+NEW_PROTO=$(random_array_record "${VERSIONS[@]}")
+NEW_METHOD=$(random_array_record "${METHODS[@]}")
 NEW_URL=$(ran_line ${URLS_FILE})
 NEW_AGENT=$(ran_line ${AGENTS_FILE})
 

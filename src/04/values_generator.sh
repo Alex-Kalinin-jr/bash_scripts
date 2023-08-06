@@ -29,25 +29,13 @@ ran_time()
     echo ${time1}
 }
 
-ran_code()
+random_array_record()
 {
-    INDEX=$(($RANDOM%10))
-    RAN_CODE=$(echo ${CODES[${INDEX}]})
+    arr=("$@")
+    count=${#arr[@]}
+    INDEX=$(($RANDOM%$count))
+    RAN_CODE=$(echo ${arr[${INDEX}]})
     echo ${RAN_CODE}
-}
-
-ran_proto()
-{
-    INDEX=$(($RANDOM%3))
-    RAN_PROTO=$(echo ${VERSIONS[${INDEX}]})
-    echo ${RAN_PROTO}
-}
-
-ran_method()
-{
-    M_INDEX=$(($RANDOM%5))
-    RAN_INDEX=$(echo ${METHODS[${M_INDEX}]})
-    echo ${RAN_INDEX}
 }
 
 ran_line()
