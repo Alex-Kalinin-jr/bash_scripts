@@ -28,3 +28,5 @@ printf "%s - %s - %s - %s - %s - %s - %s\n" \
 done
 sort -t\- -k4 nginx.log 1>>sorted_nginx.log
 exit 0
+
+# %h %^ %s %^ %m %^ %d:%t %^ %H %^ %r %^ %u

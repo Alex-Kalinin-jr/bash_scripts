@@ -11,9 +11,10 @@ source ../regexps.sh
 [[ $1 -eq 2 ]] && { awk '!seen[$1]++' \
     ../04/sorted_nginx.log 1>nginx_unique_ips.log; }
 
-[[ $1 -eq 3 ]] && awk '/- [45][0-9][0-9] -/ {print $0}' .\
-    ./04/sorted_nginx.log 1>nginx_error.log;
+[[ $1 -eq 3 ]] && awk '/- [45][0-9][0-9] -/ {print $0}' \
+    ../04/sorted_nginx.log 1>nginx_error.log;
 
 [[ $1 -eq 4 ]] && awk '(/- [45][0-9][0-9] -/) && (!seen[$1]++) {print $0}' \
     ../04/sorted_nginx.log 1>nginx_error_unique_ips.log;
 
+# %h %^ %s %^ %m %^ %d:%t %^ %H %^ %r %^ %u
