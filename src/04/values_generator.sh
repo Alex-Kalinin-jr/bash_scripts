@@ -21,11 +21,10 @@ random_number()
 
 ran_time()
 {
-    a=$(date -d "24 hours ago" +%Y-%m-%d)
-    b=$(random_number 23)
-    c=$(random_number 59)
-    d=$(random_number 59)
-    time1=$(date --date="$a $b:$c:$d" "+%d/%m/%Y:%T %z" 2> /dev/null)
+    a=$(date -d "24 hours ago" +%s)
+    b=$(echo "$((RANDOM % 86400))")
+    a=$(($a+$b))
+    time1=$(date -u -d @${a} "+%d/%m/%Y:%T %z" 2> /dev/null)
     echo ${time1}
 }
 

@@ -20,3 +20,4 @@ NEW_AGENT=$(ran_line ${AGENTS_FILE})
 printf "%s - %s - %s - %s - %s - %s - %s\n" \
         "${NEW_IP}" "${NEW_CODE}" "${NEW_METHOD}" \
         "${NEW_TIME}" "${NEW_PROTO}" "${NEW_URL}" "${NEW_AGENT}"
+        
