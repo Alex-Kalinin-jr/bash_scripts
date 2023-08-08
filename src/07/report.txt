@@ -1,6 +1,13 @@
-prometheus --config.file=prometheus.yml
-tar xvfz node_exporter-1.6.1.linux-amd64.tar.gz
-cd node_exporter-1.6.1.linux-amd64.tar.gz
-./node_exporter
-sudo curl http://localhost:8080/metrics
-sudo curl http://localhost:8080/metrics | grep "node_"
+promtool #command that comes with Prometheus to syntax check your configuration and rules.
+
+/etc/prometheus/prometheus.yml #here is default config file
+
+#for reload 
+killall -HUP prometheus
+sudo systemctl daemon-reload	#  (when the --web.enable-lifecycle flag is enabled).
+sudo systemctl restart prometheus
+
+#for reload according to docs
+kill -s SIGTERM <PID> # to shutdown prometheus
+kill -s SIGHUP <PID> #to reload config
+

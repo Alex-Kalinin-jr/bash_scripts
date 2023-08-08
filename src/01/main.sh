@@ -5,7 +5,7 @@ source ../creation_func.sh
 
 test $E_BADARGS -eq 65 && exit $E_BADARGS
 
-LOG_LOCATION="$1/file.log"
+LOG_LOCATION="/file_1.log"
 touch $LOG_LOCATION
 # the first NAMING is recursively changed folder name and 
 #+the 3nd arg is absoliute path at start and (o_O) created folder name
