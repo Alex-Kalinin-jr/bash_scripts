@@ -1,6 +1,7 @@
 # Bash Scripts
 
 Some scripts for emulating work with folders and files, and with logs.
+***use docker or VM (Ubuntu 20.04 LTS) for running scripts, otherwise you risk to fill your filesystem with garbage***
 
 ## 01. File generator
 
@@ -30,7 +31,7 @@ The log file is created with data on all created folders and files (full path, c
 
 ## 03. Cleaning the file system
 
-Write a bash script. The script is run with 1 parameter. The script can clear the system from the folders and files in 3 ways:
+The script is run with 1 parameter. The script can clear the system from the folders and files in 3 ways:
 
 **Parameter 1** The cleaning method (1 or 2 or 3).
 1. By log file
@@ -54,10 +55,7 @@ For each entry there are randomly generated the following:
 
 ## 05. Monitoring
 
-Now that you have the files to analyse, you can move on to monitoring.
-
-
-Write a bash script to parse **nginx** logs from [04](#04-log-generator) via **awk**.
+Bash script to parse **nginx** logs from [04](#04-log-generator) via **awk**.
 The script is run with 1 parameter, which has a value of 1, 2, 3 or 4. \
 Depending on the value of the parameter, it outputs the following: 
 
