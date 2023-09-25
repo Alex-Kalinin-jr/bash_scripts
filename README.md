@@ -1,6 +1,6 @@
 # Bash Scripts
 
-Some scripts for emulating work with folders and files, and with logs.
+Some scripts for emulating work with folders and files, and with logs. \
 ***use docker or VM (Ubuntu 20.04 LTS) for running scripts, otherwise you risk to fill your filesystem with garbage***
 
 ## 01. File generator
